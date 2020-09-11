@@ -37,9 +37,13 @@ const INITIAL_STATE = { content: {} };
 
 const requestBodyGenerator = (params = []) => {
   if (!params || !Array.isArray(params)) return {};
-  const requestBody = params.reduce((acc, body) => (
-    { ...acc, ...parseBodyParameter(acc, body) }
-  ), INITIAL_STATE);
+  let requestBody = INITIAL_STATE;
+  let i = 0;
+  while (i < params.length) {
+    const body = params[i];
+    requestBody = { ...requestBody, ...parseBodyParameter(requestBody, body) };
+    i += 1;
+  }
   return requestBody;
 };
 

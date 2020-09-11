@@ -11,7 +11,7 @@ const options = {
       name: 'MIT',
     },
   },
-  filesPattern: './formdata.js',
+  filesPattern: ['./formdata.js'],
   baseDir: __dirname,
 };
 

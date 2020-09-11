@@ -61,7 +61,13 @@ const parsePath = (path, state) => {
   if (!validHTTPMethod(lowerCaseMethod)) return {};
   const { tags } = path;
   const {
-    summary, bodyValues, isDeprecated, responses, parameters, tagsValues, securityValues,
+    summary,
+    bodyValues,
+    isDeprecated,
+    responses,
+    parameters,
+    tagsValues,
+    securityValues,
   } = pathValues(tags);
   return {
     ...state,
@@ -80,9 +86,16 @@ const parsePath = (path, state) => {
   };
 };
 
-const getPathObject = paths => paths.reduce((acum, item) => ({
-  ...acum, ...parsePath(item, acum),
-}), {});
+const getPathObject = paths => {
+  let response = {};
+  let i = 0;
+  while (i < paths.length) {
+    const item = paths[i];
+    response = { ...response, ...parsePath(item, response) };
+    i += 1;
+  }
+  return response;
+};
 
 const parsePaths = (swaggerObject = {}, paths = []) => {
   if (!paths || !Array.isArray(paths)) return { paths: {} };

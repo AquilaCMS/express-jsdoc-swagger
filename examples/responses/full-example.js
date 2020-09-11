@@ -11,7 +11,7 @@ const options = {
       name: 'MIT',
     },
   },
-  filesPattern: './full-example.js',
+  filesPattern: ['./full-example.js'],
   baseDir: __dirname,
   security: {
     BasicAuth: {

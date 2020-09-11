@@ -11,7 +11,7 @@ test('should give a nice error message for responses', async () => {
         name: 'MIT',
       },
     },
-    filesPattern: './jsdoc-response-error.js',
+    filesPattern: ['./jsdoc-response-error.js'],
     baseDir: __dirname,
   };
   global.console = { ...global.console, warn: jest.fn() };
@@ -36,7 +36,7 @@ test('should give a nice error message for parameters', async () => {
         name: 'MIT',
       },
     },
-    filesPattern: './jsdoc-parameter-error.js',
+    filesPattern: ['./jsdoc-parameter-error.js'],
     baseDir: __dirname,
   };
   global.console = { ...global.console, warn: jest.fn() };
@@ -61,7 +61,7 @@ test('should give a nice error message for requestBody', async () => {
         name: 'MIT',
       },
     },
-    filesPattern: './jsdoc-requestBody-error.js',
+    filesPattern: ['./jsdoc-requestBody-error.js'],
     baseDir: __dirname,
   };
   global.console = { ...global.console, warn: jest.fn() };

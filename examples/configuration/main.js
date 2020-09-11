@@ -43,7 +43,7 @@ const options = {
       },
     },
   ],
-  filesPattern: './main.js',
+  filesPattern: ['./main.js'],
   baseDir: __dirname,
 };
 

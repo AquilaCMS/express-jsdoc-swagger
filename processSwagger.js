@@ -12,7 +12,7 @@ const {
 
 const defaultLogger = () => null;
 
-const processSwagger = (options, logger = defaultLogger) => {
+const processSwagger = async (options, logger = defaultLogger) => {
   let swaggerObject = {
     openapi: '3.0.0',
     info: options.info,

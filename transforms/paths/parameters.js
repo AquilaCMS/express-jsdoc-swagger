@@ -50,7 +50,7 @@ const parseParameter = param => {
   }
   const isRequired = extraOptions.includes(REQUIRED);
   const isDeprecated = extraOptions.includes(DEPRECATED);
-  const [description, enumValues] = formatDescription(param.description);
+  const [description, enumValues, defaultValue] = formatDescription(param.description);
   const options = {
     name,
     in: inOption,
@@ -58,14 +58,13 @@ const parseParameter = param => {
     deprecated: isDeprecated,
     description,
   };
-  const schema = getSchema('@param', param.name)(param.type, enumValues);
+  const schema = getSchema('@param', param.name)(param.type, enumValues, defaultValue);
   return parameterPayload(options, schema);
 };
 
 const parametersGenerator = (paramValues = []) => {
   if (!paramValues || !Array.isArray(paramValues)) return [];
-  const params = paramValues.map(parseParameter).filter(param => param.name);
-  return params;
+  return paramValues.map(parseParameter).filter(param => param.name);
 };
 
 module.exports = parametersGenerator;

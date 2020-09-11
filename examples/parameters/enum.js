@@ -11,7 +11,7 @@ const options = {
       name: 'MIT',
     },
   },
-  filesPattern: './enum.js',
+  filesPattern: ['./enum.js'],
   baseDir: __dirname,
 };
 

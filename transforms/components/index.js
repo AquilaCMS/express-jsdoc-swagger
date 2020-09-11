@@ -29,15 +29,18 @@ const addRefSchema = (typeName, applications, elements) => {
 
 const formatProperties = properties => {
   if (!properties || !Array.isArray(properties)) return {};
-  return properties.reduce((acum, property) => {
+  let response = {};
+  let i = 0;
+  while (i < properties.length) {
+    const property = properties[i];
     const name = getPropertyName(property);
     const {
       name: typeName, applications, expression, elements,
     } = property.type;
     const [descriptionValue, enumValues] = formatDescription(property.description);
     const [description, format] = mapDescription(descriptionValue);
-    return {
-      ...acum,
+    response = {
+      ...response,
       [name]: {
         description,
         ...refSchema(typeName),
@@ -48,7 +51,9 @@ const formatProperties = properties => {
         ...addEnumValues(enumValues),
       },
     };
-  }, {});
+    i += 1;
+  }
+  return response;
 };
 
 const getRequiredProperties = properties => (
@@ -81,9 +86,14 @@ const parseSchema = schema => {
 
 const parseComponents = (swaggerObject = {}, components = []) => {
   if (!components || !Array.isArray(components)) return { components: { schemas: {} } };
-  const componentSchema = components.reduce((acum, item) => ({
-    ...acum, ...parseSchema(item),
-  }), {});
+
+  let componentSchema = {};
+  let i = 0;
+  while (i < components.length) {
+    const item = components[i];
+    componentSchema = { ...componentSchema, ...parseSchema(item) };
+    i += 1;
+  }
   return {
     ...swaggerObject,
     components: {
