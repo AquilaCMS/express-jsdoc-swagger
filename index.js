@@ -19,7 +19,6 @@ const expressJSDocSwagger = app => {
         ...result,
       };
       swaggerObject = merge.recursive(true, swaggerObject, userSwagger);
-      console.log(swaggerObject);
       events.finish(swaggerObject);
     } catch (err) {
       events.error = err;

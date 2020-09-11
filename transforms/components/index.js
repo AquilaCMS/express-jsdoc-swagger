@@ -4,6 +4,7 @@ const { refSchema, formatRefSchema } = require('../utils/refSchema');
 const addEnumValues = require('../utils/enumValues');
 const formatDescription = require('../utils/formatDescription');
 const combineSchema = require('../utils/combineSchema');
+const addDefaultValue = require('../utils/defaultValue');
 
 const REQUIRED = 'required';
 
@@ -37,7 +38,7 @@ const formatProperties = properties => {
     const {
       name: typeName, applications, expression, elements,
     } = property.type;
-    const [descriptionValue, enumValues] = formatDescription(property.description);
+    const [descriptionValue, enumValues, defaultValue] = formatDescription(property.description);
     const [description, format] = mapDescription(descriptionValue);
     response = {
       ...response,
@@ -49,6 +50,7 @@ const formatProperties = properties => {
         ...addRefSchema(typeName, applications, elements),
         ...(format ? { format } : {}),
         ...addEnumValues(enumValues),
+        ...addDefaultValue(defaultValue),
       },
     };
     i += 1;
@@ -68,9 +70,7 @@ const parseSchema = schema => {
   const propertyValues = getTagsInfo(schema.tags, 'property');
   const requiredProperties = getRequiredProperties(propertyValues);
   if (!typedef || !typedef.name) return {};
-  const {
-    elements,
-  } = typedef.type;
+  const { elements } = typedef.type;
   return {
     [typedef.name]: {
       ...combineSchema(elements),

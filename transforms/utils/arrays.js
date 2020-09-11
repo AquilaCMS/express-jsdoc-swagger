@@ -1,10 +1,10 @@
 
 const flatArray = elements => {
-  const response = [];
+  let response = [];
   let i = 0;
   while (i < elements.length) {
     const val = elements[i];
-    response.concat(val);
+    response = response.concat(val);
     i += 1;
   }
   return response;

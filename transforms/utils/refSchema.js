@@ -20,6 +20,7 @@ const formatRefSchema = (applications = []) => {
     };
     i += 1;
   }
+  return response;
 };
 
 module.exports = {
