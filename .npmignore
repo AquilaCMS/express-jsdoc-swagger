@@ -1,0 +1,5 @@
+/.vscode
+/node_modules
+.all-contributorsrc
+CODE_OF_CONDUCT.md
+commitlint.config.js

@@ -1,8 +1,12 @@
 {
-  "name": "express-jsdoc-swagger",
-  "version": "1.0.5",
+  "name": "@haegemonia/express-jsdoc-swagger",
+  "version": "1.0.1",
   "description": "Swagger OpenAPI 3.x generator",
   "main": "index.js",
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  },
   "dependencies": {
     "chalk": "^4.1.0",
     "doctrine": "^3.0.0",
@@ -37,7 +41,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BRIKEV/express-jsdoc-swagger.git"
+    "url": "git+https://github.com/haegemonia76/express-jsdoc-swagger.git"
   },
   "keywords": [
     "swagger",
@@ -50,10 +54,10 @@
     "swagger-ui",
     "OpenAPI"
   ],
-  "author": "BRIKEV (https://github.com/BRIKEV)",
+  "author": "Haegemonia76 (https://github.com/haegemonia76)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/BRIKEV/express-jsdoc-swagger/issues"
+    "url": "https://github.com/haegemonia76/express-jsdoc-swagger/issues"
   },
-  "homepage": "https://brikev.github.io/express-jsdoc-swagger-docs/#/"
+  "homepage": "https://github.com/haegemonia76/express-jsdoc-swagger#readme"
 }
