@@ -11,13 +11,13 @@ const globFilesMatches = async (baseDir, filePaths, excludedFolder = DEFAULT_EXC
   const filteredFiles = [];
   if (filePaths.length > 0) {
     let i = 0;
-    do {
+    while (i + 1 <= filePaths.length) {
       const filePath = filePaths[i];
       const files = glob.sync(path.resolve(baseDir, filePath), { ignore: '**/node_modules/**' });
       const filterFiles = files.filter(file => !file.includes(excludedFolder));
       filteredFiles.push(...filterFiles);
       i++;
-    } while (i + 1 < filePaths.length);
+    }
   }
   return filteredFiles;
 };
