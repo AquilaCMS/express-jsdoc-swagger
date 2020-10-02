@@ -1,11 +1,17 @@
-const validateTypes = require('./validateTypes');
+const { validateTypes, validateFormat } = require('./validateTypes');
 
 const REF_ROUTE = '#/components/schemas/';
 
 const refSchema = value => {
   if (!value) return {};
-  const isPrimitive = validateTypes(value);
-  const schema = isPrimitive ? { type: value } : { $ref: `${REF_ROUTE}${value}` };
+  let schema = validateFormat(value);
+  if (!schema) {
+    if (validateTypes(value)) {
+      schema = { type: value };
+    } else {
+      schema = { $ref: `${REF_ROUTE}${value}` };
+    }
+  }
   return schema;
 };
 

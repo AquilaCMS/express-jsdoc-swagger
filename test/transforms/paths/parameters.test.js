@@ -299,4 +299,40 @@ describe('params tests', () => {
     const result = setPaths({}, parsedJSDocs);
     expect(result).toEqual(expected);
   });
+
+  it('should parse jsdoc path params with non primitive value', () => {
+    const jsodInput = [`
+      /**
+       * GET /api/v1
+       * @param {date} date.query.required - date param description
+       */
+    `];
+    const expected = {
+      paths: {
+        '/api/v1': {
+          get: {
+            deprecated: false,
+            summary: '',
+            responses: {},
+            tags: [],
+            security: [],
+            parameters: [{
+              deprecated: false,
+              description: 'date param description',
+              in: 'query',
+              name: 'date',
+              required: true,
+              schema: {
+                type: 'string',
+                format: 'date',
+              },
+            }],
+          },
+        },
+      },
+    };
+    const parsedJSDocs = jsdocInfo()(jsodInput);
+    const result = setPaths({}, parsedJSDocs);
+    expect(result).toEqual(expected);
+  });
 });
