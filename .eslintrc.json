@@ -6,9 +6,10 @@
     "jest/globals": true
   },
   "extends": [
-    "airbnb-base"
+    "airbnb-base",
+    "prettier"
   ],
-  "plugins": ["jest"],
+  "plugins": ["jest", "prettier"],
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
@@ -17,12 +18,11 @@
     "ecmaVersion": 11
   },
   "rules": {
-    "arrow-parens": [
-      "error",
-      "as-needed",
-      {
-        "requireForBlockBody": false
-      }
+    "prettier/prettier": [
+        "error",
+        {
+            "endOfLine": "auto"
+        }
     ],
     "jest/no-disabled-tests": "warn",
     "jest/no-focused-tests": "error",

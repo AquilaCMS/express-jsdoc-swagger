@@ -6,45 +6,50 @@ const REQUIRED = 'required';
 const BODY_PARAM = 'body';
 
 const parseBodyParameter = (currentState, body) => {
-  const [name, inOption, ...extraOptions] = body.name.split('.');
-  if (inOption !== BODY_PARAM) {
-    return {};
-  }
-  const isRequired = extraOptions.includes(REQUIRED);
-  const [description, contentType] = mapDescription(body.description);
-  const options = {
-    name,
-    required: isRequired,
-    description,
-  };
-  return {
-    ...currentState,
-    description: setProperty(options, 'description', {
-      type: 'string',
-    }),
-    required: setProperty(options, 'required', {
-      type: 'boolean',
-      defaultValue: false,
-    }),
-    content: {
-      ...currentState.content,
-      ...getContent(body.type, contentType, body.description),
-    },
-  };
+    const [name, inOption, ...extraOptions] = body.name.split('.');
+    if (inOption !== BODY_PARAM) {
+        return {};
+    }
+    const isRequired = extraOptions.includes(REQUIRED);
+    const [description, contentType] = mapDescription(
+        body.description,
+    );
+    const options = {
+        name,
+        required: isRequired,
+        description,
+    };
+    return {
+        ...currentState,
+        description: setProperty(options, 'description', {
+            type: 'string',
+        }),
+        required: setProperty(options, 'required', {
+            type: 'boolean',
+            defaultValue: false,
+        }),
+        content: {
+            ...currentState.content,
+            ...getContent(body.type, contentType, body.description),
+        },
+    };
 };
 
 const INITIAL_STATE = { content: {} };
 
 const requestBodyGenerator = (params = []) => {
-  if (!params || !Array.isArray(params)) return {};
-  let requestBody = INITIAL_STATE;
-  let i = 0;
-  while (i < params.length) {
-    const body = params[i];
-    requestBody = { ...requestBody, ...parseBodyParameter(requestBody, body) };
-    i += 1;
-  }
-  return requestBody;
+    if (!params || !Array.isArray(params)) return {};
+    let requestBody = INITIAL_STATE;
+    let i = 0;
+    while (i < params.length) {
+        const body = params[i];
+        requestBody = {
+            ...requestBody,
+            ...parseBodyParameter(requestBody, body),
+        };
+        i += 1;
+    }
+    return requestBody;
 };
 
 module.exports = requestBodyGenerator;

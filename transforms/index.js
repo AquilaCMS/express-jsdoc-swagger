@@ -5,9 +5,9 @@ const getComponents = require('./components');
 const getTags = require('./tags');
 
 module.exports = {
-  getBasicInfo,
-  getPaths,
-  getComponents,
-  getTags,
-  getSecuritySchemes,
+    getBasicInfo,
+    getPaths,
+    getComponents,
+    getTags,
+    getSecuritySchemes,
 };
