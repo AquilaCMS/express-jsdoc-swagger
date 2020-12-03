@@ -1,4 +1,3 @@
-
 const flatArray = elements => {
   let response = [];
   let i = 0;
